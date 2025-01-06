@@ -1,13 +1,94 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!-- ... existing head content ... -->
+<style>
+    /* ... existing styles ... */
+    
+    /* Add smooth transitions for better user experience */
+    .form-control {
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .form-control:focus {
+        border-color: #007AFF;
+        box-shadow: 0 0 10px rgba(0, 122, 255, 0.3);
+    }
+
+    /* Improve button styling */
+    .btn-primary {
+        background: linear-gradient(45deg, #5904b3, #0459f8);
+        border: none;
+        padding: 12px 25px;
+        font-size: 18px;
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(45deg, #6a05d1, #056fff);
+    }
+
+    /* Add password visibility toggle */
+    .password-toggle {
+        position: absolute;
+        left: 10px;
+        top: 35px;
+        cursor: pointer;
+        color: #666;
+    }
+</style>
+
+<!-- ... existing body content until form ... -->
+<div class="container animate__animated animate__fadeIn">
+    <form action="" method="post" id="loginForm">
+        <div class="form-group">
+            <label for="username">اسم المستخدم</label>
+            <i class="fas fa-user"></i>
+            <input type="text" class="form-control" id="username" name="username" required 
+                   autocomplete="username">
+        </div>
+        <div class="form-group">
+            <label for="password">كلمة المرور</label>
+            <i class="fas fa-lock"></i>
+            <input type="password" class="form-control" id="password" name="password" required
+                   autocomplete="current-password">
+            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+        </button>
+    </form>
+</div>
+
+<!-- Add this before the closing body tag -->
+<script>
+    // ... existing menu code ...
+
+    // Password visibility toggle
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    // Form submission handling
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Add your login logic here
+        Swal.fire({
+            title: 'جاري تسجيل الدخول...',
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    });
+
+    // ... existing gradient animation code ...
+</script>
+</body>
 </html>
